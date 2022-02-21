@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Mandatory|x64">
+      <Configuration>Mandatory</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Bonus|x64">
+      <Configuration>Bonus</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{31dbdc1f-e992-41ed-87ce-89a869b4e856}</ProjectGuid>
+    <Keyword>Linux</Keyword>
+    <RootNamespace>_42cursus_push_swap</RootNamespace>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <ApplicationType>Linux</ApplicationType>
+    <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
+    <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
+    <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mandatory|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>/tmp</RemoteRootDir>
+    <RemoteProjectRelDir>$(SolutionName)</RemoteProjectRelDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Bonus|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>/tmp</RemoteRootDir>
+    <RemoteProjectRelDir>$(SolutionName)</RemoteProjectRelDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Bonus|x64'">
+    <RemoteDeployDir>$(RemoteRootDir)/$(SolutionName)</RemoteDeployDir>
+    <NMakeIncludeSearchPath>deps/cunits42/include;tests;push_swap</NMakeIncludeSearchPath>
+    <NMakePreprocessorDefinitions>INTERNAL;MANDATORY;BONUS</NMakePreprocessorDefinitions>
+    <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
+    <RemoteBuildCommandLine>make bonus</RemoteBuildCommandLine>
+    <RemoteReBuildCommandLine>make re</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>make fclean</RemoteCleanCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Mandatory|x64'">
+    <RemoteDeployDir>$(RemoteRootDir)/$(SolutionName)</RemoteDeployDir>
+    <NMakeIncludeSearchPath>deps/cunits42/include;tests;push_swap</NMakeIncludeSearchPath>
+    <NMakePreprocessorDefinitions>INTERNAL;MANDATORY</NMakePreprocessorDefinitions>
+    <RemoteCCompileToolExe>gcc</RemoteCCompileToolExe>
+    <RemoteBuildCommandLine>make mandatory</RemoteBuildCommandLine>
+    <RemoteReBuildCommandLine>make re</RemoteReBuildCommandLine>
+    <RemoteCleanCommandLine>make fclean</RemoteCleanCommandLine>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
+    <None Include=".gitmodules" />
+    <None Include="docs\pdf\en.subject-push_swap.pdf" />
+    <None Include="docs\README.md" />
+    <None Include="Makefile" />
+    <None Include="push_swap\.editorconfig" />
+    <None Include="push_swap\.gitignore" />
+    <None Include="push_swap\Makefile" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tests\test_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tests\tests.h" />
+  </ItemGroup>
+  <ItemDefinitionGroup />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

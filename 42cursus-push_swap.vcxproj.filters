@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{588e7ebf-2a31-4531-9dc2-9a69456557ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="push_swap">
+      <UniqueIdentifier>{5b82945d-800f-4d16-a1e6-5e28b4202a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="push_swap\Header Files">
+      <UniqueIdentifier>{55181c64-28ae-401f-8ab4-71a82a9884ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="push_swap\Source Files">
+      <UniqueIdentifier>{59e1e924-ca5f-4ee7-9012-6e432b3044d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Data Files">
+      <UniqueIdentifier>{b0b6b47a-e9f4-4ffe-94ef-28c13301ecd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Header Files">
+      <UniqueIdentifier>{bb5a79a4-3dc9-4dc7-a51c-d296b5caa2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Source Files">
+      <UniqueIdentifier>{07f1b453-3701-4e32-9567-481529367a5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{349fbd0a-b5b1-4f48-9e16-5d85266fe85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs\Pdf Files">
+      <UniqueIdentifier>{322daa76-f92d-466e-b309-757cdc3cd71a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="push_swap\.editorconfig">
+      <Filter>push_swap</Filter>
+    </None>
+    <None Include="push_swap\.gitignore">
+      <Filter>push_swap</Filter>
+    </None>
+    <None Include="push_swap\Makefile">
+      <Filter>push_swap</Filter>
+    </None>
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
+    <None Include=".gitmodules" />
+    <None Include="Makefile" />
+    <None Include="README.md" />
+    <None Include="docs\pdf\en.subject-push_swap.pdf">
+      <Filter>Docs\Pdf Files</Filter>
+    </None>
+    <None Include="docs\README.md">
+      <Filter>Docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tests\tests.h">
+      <Filter>Tests\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tests\test_main.c">
+      <Filter>Tests\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

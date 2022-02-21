@@ -1,0 +1,3 @@
+[submodule "deps/cunits42"]
+	path = deps/cunits42
+	url = git@github.com:xbeheydt/cunits42.git
