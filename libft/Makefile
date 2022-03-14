@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    push_swap - Makefile                               :+:      :+:    :+:    #
+#    libft - Makefile                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: xbeheydt <xbeheydt@42lausanne.ch>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/29 15:30:27 by xbeheydt          #+#    #+#              #
-#    Updated: 2022/03/09 11:25:24 by xbeheydt         ###   ########.ch        #
+#    Updated: 2022/03/09 11:25:24 by xbeheydt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: clean fclean all re tests del-build
+.PHONY: clean fclean all re tests
 
 BUILD_DIR		?= $(PWD)/build
 OBJ_DIR			?= ${BUILD_DIR}/obj
@@ -21,30 +21,24 @@ SRC_DIR			= $(CURDIR)/src
 HEADER_DIR		= $(CURDIR)/include
 TEST_DIR		= $(CURDIR)/tests
 
-NAME			= ${EXE_DIR}/push_swap
-LIBFT			= ${LIB_DIR}/libft.a
+NAME			= ${LIB_DIR}/libft.a
 
-HEADERS			= include/push_swap.h
+HEADERS			= libft/include/libft.h \
+				  libft/include/get_next_line.h \
+				  libft/include/ft_printf.h
 INCLUDES		= $(addprefix ${INCLUDE_DIR}/, $(addsuffix .h, $(notdir $(basename ${HEADERS}))))
-SRCS			= src/argparser.c \
-				  src/push.c \
-				  src/rev_rotate.c \
-				  src/rotate.c \
-				  src/stack.c \
-				  src/stack_operations.c \
-				  src/swap.c
-SRCS_EXE		= ${SRCS} src/push_swap.c
-OBJS 			= $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS_EXE)))))
+SRCS			= $(wildcard ${SRC_DIR}/ft_*.c ${SRC_DIR}/ft_printf/*.c ${SRC_DIR}/get_next_line/*.c)
+OBJS 			= $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS)))))
 
 SRCS_TEST		= $(wildcard ${TEST_DIR}/.*.c ${TEST_DIR}/*/.*.c)
 
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra
 ifdef DEBUG
-	CFLAGS			+= -g3
+CFLAGS			+= -g3
 endif
-IFLAGS			= -I${INCLUDE_DIR}
-IFLAGSTEST		= ${IFLAGS} -I${TEST_DIR}
+IFLAGS			= -I${HEADER_DIR}
+IFLAGSTEST		= ${IFLAGS} -Isrc/ft_printf -Isrc/get_next_line -I${TEST_DIR}
 
 VPATH			= $(sort $(dir $(SRCS)))
 
@@ -53,11 +47,12 @@ RM				= rm -rf
 MKDIR			= mkdir -p
 CP				= cp
 
-all: $(NAME)
+all: $(NAME) $(INCLUDES)
 
-$(NAME): ${LIBFT} ${INCLUDES} ${OBJS}
-	$(MKDIR) ${EXE_DIR}
-	$(CC) ${CFLAGS} ${IFLAGS} -L${LIB_DIR} ${OBJS} -o $@ -lft
+$(NAME): ${INCLUDES} ${OBJS}
+	$(MKDIR) ${LIB_DIR}
+	ar rcs $@ ${OBJS}
+	ranlib $@
 
 $(OBJ_DIR)/%.o: %.c
 	$(MKDIR) ${OBJ_DIR}
@@ -66,9 +61,6 @@ $(OBJ_DIR)/%.o: %.c
 $(INCLUDE_DIR)/%: ${HEADER_DIR}/%
 	$(MKDIR) ${INCLUDE_DIR}
 	$(CP) $< $@
-
-$(LIBFT):
-	$(MAKE) -C libft
 
 norm:
 	@$(NORM) ${HEADER_DIR} ${SRC_DIR}
@@ -87,9 +79,8 @@ del-build:
 re: fclean all
 
 ARGS	?=
-tests:
+tests: $(NAME)
 	@$(MKDIR) ${EXE_DIR}
-	@$(CC) ${CFLAGS} ${IFLAGSTEST} -L${LIB_DIR} -o ${EXE_DIR}/tests ${SRCS} ${SRCS_TEST} -lft
-	@echo "push_swap test"
-	@echo "=============="
+	@$(CC) -w ${IFLAGSTEST} -L${LIB_DIR} -o ${EXE_DIR}/tests ${SRCS_TEST} -lft
+	@echo "Libft test"
 	@${EXE_DIR}/tests ${ARGS}

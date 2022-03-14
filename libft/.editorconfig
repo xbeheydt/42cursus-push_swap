@@ -8,15 +8,8 @@ end_of_line = lf
 charset = utf-8
 indent_style = tab
 trim_trailling_whitespace = true
-<<<<<<< HEAD
-=======
 guidelines = 80
->>>>>>> dee8c2f (rebuild all)
 
 [*.{h,c}]
 end_of_line = lf
 cpp_space_pointer_reference_alignment = right
-<<<<<<< HEAD
-guidelines = 79
-=======
->>>>>>> dee8c2f (rebuild all)
