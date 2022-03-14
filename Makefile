@@ -57,6 +57,7 @@ all: $(NAME)
 
 $(NAME): ${LIBFT} ${INCLUDES} ${OBJS}
 	$(MKDIR) ${EXE_DIR}
+	@echo "push_swap test"
 	$(CC) ${CFLAGS} ${IFLAGS} -L${LIB_DIR} ${OBJS} -o $@ -lft
 
 $(OBJ_DIR)/%.o: %.c
