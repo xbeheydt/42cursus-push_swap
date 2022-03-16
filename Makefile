@@ -94,3 +94,6 @@ tests:
 	@echo "push_swap test"
 	@echo "=============="
 	@${EXE_DIR}/tests ${ARGS}
+
+ctest:
+	@$(MKDIR) build; cd build; cmake ..; make 42cursus-push_swap-tests; ctest $(ARGS)

@@ -9,12 +9,12 @@ set(
 ) 
 set(
 	SOURCE_FILE_TESTS
-	".tests.c"
-	".test_main.c"
-	".test_stack_handling.c"
-	".test_stack_operations.c"
-	".test_operations_frontend.c"
-	".test_argparser.c"
+	"${PROJECT_SOURCE_DIR}/tests/.tests.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_main.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_stack_handling.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_stack_operations.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_operations_frontend.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_argparser.c"
 )
 
 if($ENV{INTERNAL})
@@ -38,7 +38,7 @@ add_executable(
 	${SOURCE_FILE_TESTS}
 	${SOURCE_FILES}
 )
-target_link_libraries(${PROJECT_NAME}-tests libft)
+target_link_libraries(${PROJECT_NAME}-tests libft libpush_swap)
 target_include_directories(
 	${PROJECT_NAME}-tests
 	PRIVATE
@@ -59,7 +59,6 @@ source_group(
 )
 
 # tests section
-#enable_testing()
 add_test(test_stack_rotate ${PROJECT_NAME}-tests -t test_stack_rotate)
 set_tests_properties(test_stack_rotate PROPERTIES WILL_FAIL TRUE)
 set_tests_properties(test_stack_rotate PROPERTIES PASS_REGULAR_EXPRESSION "KO")
