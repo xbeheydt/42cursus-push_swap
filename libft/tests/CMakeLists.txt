@@ -64,7 +64,7 @@ set(
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_get_buffer.c"
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_clear_buffer.c"
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_get_line.c"
-	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnlt_line_realloc.c"
+	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_line_realloc.c"
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_get_next_line.c"
 	"${PROJECT_SOURCE_DIR}/tests/ft_printf/.test_ft_printf.c"
 )

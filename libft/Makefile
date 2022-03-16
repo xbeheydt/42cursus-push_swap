@@ -10,10 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: clean fclean all re tests
+.PHONY: clean fclean all re tests ctest
 
 BUILD_DIR		?= $(PWD)/build
-OBJ_DIR			?= ${BUILD_DIR}/obj
+OBJ_DIR			?= ${BUILD_DIR}/obj/libft
 INCLUDE_DIR		?= ${BUILD_DIR}/include
 LIB_DIR			?= ${BUILD_DIR}/lib
 EXE_DIR			?= ${BUILD_DIR}/bin
@@ -84,3 +84,6 @@ tests: $(NAME)
 	@$(CC) -w ${IFLAGSTEST} -L${LIB_DIR} -o ${EXE_DIR}/tests ${SRCS_TEST} -lft
 	@echo "Libft test"
 	@${EXE_DIR}/tests ${ARGS}
+
+ctest:
+	@$(MKDIR) build; cd build; cmake ..; make 42cursus-libft-tests; ctest $(ARGS)
