@@ -43,8 +43,8 @@ void	strevrot(t_stack **s)
 		stadd_front(s, stpop_back(s));
 }
 
-void	stpush(t_stack **a, t_stack **b)
+void	stpush(t_stack **src, t_stack **dst)
 {
-	if ((*a))
-		stadd_front(b, stpop_front(a));
+	if ((*src))
+		stadd_front(dst, stpop_front(src));
 }

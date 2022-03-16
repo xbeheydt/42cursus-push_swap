@@ -32,7 +32,7 @@ void	stclear(t_stack **s);
 void	stswap(t_stack **a, t_stack **b);
 void	strot(t_stack **s);
 void	strevrot(t_stack **s);
-void	stpush(t_stack **a, t_stack **b);
+void	stpush(t_stack ** src, t_stack ** dst);
 int		stissorted(t_stack *s, int way);
 int		stfindi(t_stack *s, int i);
 
