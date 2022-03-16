@@ -42,7 +42,7 @@ void	ss(t_stack **a, t_stack **b)
 	}
 	else
 	{
-		stack_swap(a);
-		stack_swap(b);
+		sa(a);
+		sb(b);
 	}
 }

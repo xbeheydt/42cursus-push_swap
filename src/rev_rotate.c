@@ -42,7 +42,7 @@ void	rrr(t_stack **a, t_stack **b)
 	}
 	else
 	{
-		stack_rev_rotate(a);
-		stack_rev_rotate(b);
+		rra(a);
+		rrb(b);
 	}
 }
