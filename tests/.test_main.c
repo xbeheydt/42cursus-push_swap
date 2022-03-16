@@ -25,6 +25,15 @@ int	test_stack_swap(void *);
 int	test_stack_issorted(void *);
 int	test_argparser(void *);
 int	test_push(void *);
+int	test_ra(void *);
+int	test_rb(void *);
+int	test_rr(void *);
+int	test_rra(void *);
+int	test_rrb(void *);
+int	test_rrr(void *);
+int	test_sa(void *);
+int	test_sb(void *);
+int	test_ss(void *);
 
 static unit_t	tests[] = {
 	/* stack.c */
@@ -42,6 +51,18 @@ static unit_t	tests[] = {
 	{ TEST_FCN(test_argparser), NULL, NULL, RUN },
 	/* push.c */
 	{ TEST_FCN(test_push), NULL, NULL, RUN },
+	/* rotate.c */
+	{ TEST_FCN(test_ra), NULL, NULL, RUN },
+	{ TEST_FCN(test_rb), NULL, NULL, RUN },
+	{ TEST_FCN(test_rr), NULL, NULL, RUN },
+	/* rev_rotate.c */
+	{ TEST_FCN(test_rra), NULL, NULL, RUN },
+	{ TEST_FCN(test_rrb), NULL, NULL, RUN },
+	{ TEST_FCN(test_rrr), NULL, NULL, RUN },
+	/* swap.c */
+	{ TEST_FCN(test_sa), NULL, NULL, RUN },
+	{ TEST_FCN(test_sb), NULL, NULL, RUN },
+	{ TEST_FCN(test_ss), NULL, NULL, RUN },
 	TEST_END
 };
 
