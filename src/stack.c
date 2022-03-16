@@ -16,15 +16,9 @@
 
 /* Private functions */
 
-static void	lstclear_content(void *content)
-{
-	free(content);
-	content = NULL;
-}
-
 /* Public API */
 
-t_stack	*stacknew(void)
+t_stack	*stnew(int val)
 {
 	t_stack	*s;
 
@@ -32,36 +26,66 @@ t_stack	*stacknew(void)
 	s = malloc(sizeof(t_stack));
 	if (s)
 	{
-		s->lst = NULL;
-		s->last = NULL;
-		s->size = 0;
+		s->val = val;
+		s->next = NULL;
 	}
 	return (s);
 }
 
-void	stackadd_back(t_stack **s, int *val)
+void	stadd_back(t_stack **s, t_stack *n)
 {
-	(*s)->last = ft_lstnew(val);
-	ft_lstadd_back(&((*s)->lst), (*s)->last);
-	(*s)->size++;
+	t_stack	*cur;
+	if ((*s))
+	{
+		cur = (*s);
+		while (cur->next)
+			cur = cur->next;
+		cur->next = n;
+	}
+	else
+		(*s) = n;
 }
 
-void	stackadd_front(t_stack **s, int *val)
-{
-	ft_lstadd_front(&((*s)->lst), ft_lstnew(val));
-	if ((*s)->last == NULL)
-		(*s)->last = (*s)->lst;
-	(*s)->size++;
-}
-
-void	stackclear(t_stack **s)
+void	stadd_front(t_stack **s, t_stack *n)
 {
 	if ((*s))
 	{
-		ft_lstclear(&((*s)->lst), lstclear_content);
-		(*s)->lst = NULL;
-		(*s)->last = NULL;
-		free((*s));
-		(*s) = NULL;
+		n->next = (*s);
 	}
+	(*s) = n;
+}
+
+t_stack	*stpop_back(t_stack **s)
+{
+	t_stack	*cur;
+	t_stack	*last;
+
+	cur = (*s);
+	if (cur == NULL || cur->next == NULL)
+	{
+		(*s) = NULL;
+		return (cur);
+	}
+	while (cur && cur->next && cur->next->next)
+	{
+		cur = cur->next;
+	}
+	last = cur->next;
+	cur->next = NULL;
+	return (last);
+}
+
+t_stack	*stpop_front(t_stack **s)
+{
+	t_stack	*front;
+
+	front = (*s);
+	if (front == NULL || front->next == NULL)
+	{
+		(*s) = NULL;
+		return (front);
+	}
+	(*s) = (*s)->next;
+	front->next = NULL;
+	return (front);
 }

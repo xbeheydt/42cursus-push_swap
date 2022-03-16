@@ -16,25 +16,25 @@
 # include <libft.h>
 # include <stddef.h>
 
-typedef struct s_stack
+typedef struct s_st
 {
-	t_list	*lst;
-	t_list	*last;
-	int		size;
+	int			val;
+	struct s_st	*next;
 }	t_stack;
 
-/* stack.c - stack handlers */
-t_stack	*stacknew(void);
-void	stackadd_back(t_stack **s, int *val);
-void	stackadd_front(t_stack **s, int *val);
-void	stackclear(t_stack **s);
-
-/* stack_operations.c - push, rotate, rev_rot and swap vals on stacks */
-void	stack_rotate(t_stack **s);
-void	stack_rev_rotate(t_stack **s);
-void	stack_push(t_stack **a, t_stack **b);
-void	stack_swap(t_stack **s);
-int		stack_issorted(t_stack *s, int dir);
+/* stack{,2,3} - stack handlers */
+t_stack	*stnew(int val);
+void	stadd_back(t_stack **s, t_stack *n);
+void	stadd_front(t_stack **s, t_stack *n);
+t_stack	*stpop_back(t_stack **s);
+t_stack	*stpop_front(t_stack **s);
+void	stclear(t_stack **s);
+void	stswap(t_stack **a, t_stack **b);
+void	strot(t_stack **s);
+void	strevrot(t_stack **s);
+void	stpush(t_stack **a, t_stack **b);
+int		stissorted(t_stack *s, int way);
+int		stfindi(t_stack *s, int i);
 
 /* argparser.c - handling arguments */
 int		argparser(t_stack **s, const char *argv[]);

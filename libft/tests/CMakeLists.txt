@@ -67,6 +67,7 @@ set(
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_line_realloc.c"
 	"${PROJECT_SOURCE_DIR}/tests/get_next_line/.test_gnl_get_next_line.c"
 	"${PROJECT_SOURCE_DIR}/tests/ft_printf/.test_ft_printf.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_ft_atol.c"
 )
 
 if($ENV{INTERNAL})

@@ -19,13 +19,15 @@ set(
 set(
 	SOURCE_FILES
 	"${PROJECT_SOURCE_DIR}/src/push_swap.c"
-	"${PROJECT_SOURCE_DIR}/src/argparser.c"
 	"${PROJECT_SOURCE_DIR}/src/stack.c"
-	"${PROJECT_SOURCE_DIR}/src/stack_operations.c"
+	"${PROJECT_SOURCE_DIR}/src/stack2.c"
+	"${PROJECT_SOURCE_DIR}/src/stack3.c"
+	"${PROJECT_SOURCE_DIR}/src/argparser.c"
 	"${PROJECT_SOURCE_DIR}/src/push.c"
 	"${PROJECT_SOURCE_DIR}/src/swap.c"
 	"${PROJECT_SOURCE_DIR}/src/rotate.c"
 	"${PROJECT_SOURCE_DIR}/src/rev_rotate.c"
+	#"${PROJECT_SOURCE_DIR}/src/sort_engine.c"
 )
 
 # Create static lib target

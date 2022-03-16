@@ -15,29 +15,28 @@
 
 void	rra(t_stack **a)
 {
-	if ((*a) && (*a)->lst && (*a)->size > 1)
+	if ((*a) && (*a)->next)
 	{
-		stack_rev_rotate(a);
+		strevrot(a);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }
 
 void	rrb(t_stack **b)
 {
-	if ((*b) && (*b)->lst && (*b)->size > 1)
+	if ((*b) && (*b)->next)
 	{
-		stack_rev_rotate(b);
+		strevrot(b);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
-	if ((*a) && (*a)->lst && (*a)->size > 1
-		&& (*b)->size > 1 && (*b) && (*b)->lst)
+	if ((*a) && (*a)->next && (*b) && (*b)->next)
 	{
-		stack_rev_rotate(a);
-		stack_rev_rotate(b);
+		strevrot(a);
+		strevrot(b);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 	else

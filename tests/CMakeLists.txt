@@ -11,8 +11,7 @@ set(
 	SOURCE_FILE_TESTS
 	"${PROJECT_SOURCE_DIR}/tests/.tests.c"
 	"${PROJECT_SOURCE_DIR}/tests/.test_main.c"
-	"${PROJECT_SOURCE_DIR}/tests/.test_stack_handling.c"
-	"${PROJECT_SOURCE_DIR}/tests/.test_stack_operations.c"
+	"${PROJECT_SOURCE_DIR}/tests/.test_stack.c"
 	"${PROJECT_SOURCE_DIR}/tests/.test_operations_frontend.c"
 	"${PROJECT_SOURCE_DIR}/tests/.test_argparser.c"
 )

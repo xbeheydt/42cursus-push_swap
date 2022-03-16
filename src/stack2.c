@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   stack2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xbeheydt <xbeheydt@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,37 +11,40 @@
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <libft.h>
+#include <stdlib.h>
 
-void	ra(t_stack **a)
+void	stclear(t_stack **s)
 {
-	if ((*a) && (*a)->next)
+	if ((*s))
+		stclear(&(*s)->next);
+	free((*s));
+	(*s) = NULL;
+}
+
+void	stswap(t_stack **a, t_stack **b)
+{
+	if ((*a) && (*b))
 	{
-		strot(a);
-		ft_putendl_fd((char *)__func__, 1);
+		(*a)->val ^= (*b)->val;
+		(*b)->val ^= (*a)->val;
+		(*a)->val ^= (*b)->val;
 	}
 }
 
-void	rb(t_stack **b)
+void	strot(t_stack **s)
 {
-	if ((*b) && (*b)->next)
-	{
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
-	}
+	if ((*s) && (*s)->next)
+		stadd_back(s, stpop_front(s));
 }
 
-void	rr(t_stack **a, t_stack **b)
+void	strevrot(t_stack **s)
 {
-	if ((*a) && (*a)->next && (*b) && (*b)->next)
-	{
-		strot(a);
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
-	}
-	else
-	{
-		ra(a);
-		rb(b);
-	}
+	if ((*s) && (*s)->next)
+		stadd_front(s, stpop_back(s));
+}
+
+void	stpush(t_stack **a, t_stack **b)
+{
+	if ((*a))
+		stadd_front(b, stpop_front(a));
 }

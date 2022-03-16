@@ -15,18 +15,18 @@
 
 void	pa(t_stack **a, t_stack **b)
 {
-	if ((*b) && (*b)->lst)
+	if ((*b))
 	{
-		stack_push(b, a);
+		stpush(b, a);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }
 
 void	pb(t_stack **a, t_stack **b)
 {
-	if ((*a) && (*a)->lst)
+	if ((*a))
 	{
-		stack_push(a, b);
+		stpush(a, b);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }

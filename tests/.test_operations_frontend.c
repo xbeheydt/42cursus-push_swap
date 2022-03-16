@@ -15,21 +15,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define INT *(int *)
-
-static int	*lstadd_content(int i)
-{
-	int	*val;
-
-	val = NULL;
-	val = malloc(sizeof(int));
-	if (val)
-	{
-		*val = i;
-	}
-	return (val);
-}
-
 int	test_push(void *args)
 {
 	(void)args;
@@ -40,17 +25,13 @@ int	test_push(void *args)
 	catch_fd(1, 1);
 	
 	pa(&a, &b);
-
-	a = stacknew();
-	b = stacknew();
-	pa(&a, &b);
 	ret = catch_fd(0, 1);
 	unit_test(ret == NULL, "");
 	free(ret);
 	
-	stackadd_back(&a, lstadd_content(1));
-	stackadd_back(&a, lstadd_content(2));
-	stackadd_back(&a, lstadd_content(3));
+	stadd_back(&a, stnew(1));
+	stadd_back(&a, stnew(2));
+	stadd_back(&a, stnew(3));
 
 	catch_fd(1, 1);
 	pb(&a, &b);
@@ -58,9 +39,9 @@ int	test_push(void *args)
 	unit_test(strcmp(ret, "pb\n") == 0, "");
 	free(ret);
 
-	unit_test(INT b->lst->content == 1, "");
-	unit_test(INT a->lst->content == 2, "");
-	unit_test(INT a->lst->next->content == 3, "");
+	unit_test(b->val == 1, "");
+	unit_test(a->val == 2, "");
+	unit_test(a->next->val == 3, "");
 
 	catch_fd(1, 1);
 	pa(&a, &b);
@@ -68,17 +49,17 @@ int	test_push(void *args)
 	unit_test(strcmp(ret, "pa\n") == 0, "");
 	free(ret);
 
-	unit_test(b->lst == NULL, "");
-	unit_test(INT a->lst->content == 1, "");
-	unit_test(INT a->lst->next->content == 2, "");
-	unit_test(INT a->last->content == 3, "");
+	unit_test(b == NULL, "");
+	unit_test(a->val == 1, "");
+	unit_test(a->next->val == 2, "");
+	unit_test(a->next->next->val == 3, "");
 
 	catch_fd(1, 1);
 	pa(&a, &b);
 	ret = catch_fd(0, 1);
 	unit_test(ret == NULL, "");
-	stackclear(&a);
-	stackclear(&b);
+	stclear(&a);
+	stclear(&b);
 	free(ret);
 	return (OK);
 }
@@ -91,21 +72,18 @@ int	test_ra(void *args)
 
 	catch_fd(1, 1);
 	ra(&a);
-	a = stacknew();
+	stadd_back(&a, stnew(1));
 	ra(&a);
-	stackadd_back(&a, lstadd_content(1));
-	ra(&a);
-	stackadd_back(&a, lstadd_content(2));
-	stackadd_back(&a, lstadd_content(3));
+	stadd_back(&a, stnew(2));
+	stadd_back(&a, stnew(3));
 	ra(&a);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "ra\n") == 0, "");
 	free(ret);
-	unit_test(INT a->lst->content == 2, "");
-	unit_test(INT a->lst->next->content == 3, "");
-	unit_test(INT a->lst->next->next->content == 1, "");
-	unit_test(INT a->last->content == 1, "");
-	stackclear(&a);
+	unit_test(a->val == 2, "");
+	unit_test(a->next->val == 3, "");
+	unit_test(a->next->next->val == 1, "");
+	stclear(&a);
 	return (OK);
 }
 
@@ -117,21 +95,18 @@ int	test_rb(void *args)
 
 	catch_fd(1, 1);
 	rb(&b);
-	b = stacknew();
+	stadd_back(&b, stnew(1));
 	rb(&b);
-	stackadd_back(&b, lstadd_content(1));
-	rb(&b);
-	stackadd_back(&b, lstadd_content(2));
-	stackadd_back(&b, lstadd_content(3));
+	stadd_back(&b, stnew(2));
+	stadd_back(&b, stnew(3));
 	rb(&b);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "rb\n") == 0, "");
 	free(ret);
-	unit_test(INT b->lst->content == 2, "");
-	unit_test(INT b->lst->next->content == 3, "");
-	unit_test(INT b->lst->next->next->content == 1, "");
-	unit_test(INT b->last->content == 1, "");
-	stackclear(&b);
+	unit_test(b->val == 2, "");
+	unit_test(b->next->val == 3, "");
+	unit_test(b->next->next->val == 1, "");
+	stclear(&b);
 	return (OK);
 }
 
@@ -145,50 +120,44 @@ int	test_rr(void *args)
 	catch_fd(1, 1);
 	rr(&a, &b);
 
-	a = stacknew();
-	b = stacknew();
+	stadd_back(&a, stnew(11));
 	rr(&a, &b);
 
-	stackadd_back(&a, lstadd_content(11));
+	stadd_back(&b, stnew(21));
 	rr(&a, &b);
 
-	stackadd_back(&b, lstadd_content(21));
+	stadd_back(&a, stnew(12));
 	rr(&a, &b);
 
-	stackadd_back(&a, lstadd_content(12));
+	stclear(&a);
+
+	stadd_back(&b, stnew(22));
 	rr(&a, &b);
 
-	stackclear(&a);
-	a = stacknew();
+	stclear(&b);
 
-	stackadd_back(&b, lstadd_content(22));
-	rr(&a, &b);
-
-	stackclear(&b);
-	b = stacknew();
-
-	stackadd_back(&a, lstadd_content(11));
-	stackadd_back(&b, lstadd_content(21));
-	stackadd_back(&a, lstadd_content(12));
-	stackadd_back(&b, lstadd_content(22));
-	stackadd_back(&a, lstadd_content(13));
-	stackadd_back(&b, lstadd_content(23));
+	stadd_back(&a, stnew(11));
+	stadd_back(&b, stnew(21));
+	stadd_back(&a, stnew(12));
+	stadd_back(&b, stnew(22));
+	stadd_back(&a, stnew(13));
+	stadd_back(&b, stnew(23));
 	rr(&a, &b);
 
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "ra\nrb\nrr\n") == 0, "");
 
-	unit_test(INT a->lst->content == 12, "");
-	unit_test(INT a->lst->next->content == 13, "");
-	unit_test(INT a->lst->next->next->content == 11, "");
+	unit_test(a->val == 12, "");
+	unit_test(a->next->val == 13, "");
+	unit_test(a->next->next->val == 11, "");
 
-	unit_test(INT b->lst->content == 22, "");
-	unit_test(INT b->lst->next->content == 23, "");
-	unit_test(INT b->lst->next->next->content == 21, "");
+	unit_test(b->val == 22, "");
+	unit_test(b->next->val == 23, "");
+	unit_test(b->next->next->val == 21, "");
 
 	free(ret);
-	stackclear(&a);
-	stackclear(&b);
+	stclear(&a);
+	stclear(&b);
 
 	return (OK);
 }
@@ -201,21 +170,18 @@ int	test_rra(void *args)
 
 	catch_fd(1, 1);
 	rra(&a);
-	a = stacknew();
+	stadd_back(&a, stnew(1));
 	rra(&a);
-	stackadd_back(&a, lstadd_content(1));
-	rra(&a);
-	stackadd_back(&a, lstadd_content(2));
-	stackadd_back(&a, lstadd_content(3));
+	stadd_back(&a, stnew(2));
+	stadd_back(&a, stnew(3));
 	rra(&a);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "rra\n") == 0, "");
 	free(ret);
-	unit_test(INT a->lst->content == 3, "");
-	unit_test(INT a->lst->next->content == 1, "");
-	unit_test(INT a->lst->next->next->content == 2, "");
-	unit_test(INT a->last->content == 2, "");
-	stackclear(&a);
+	unit_test(a->val == 3, "");
+	unit_test(a->next->val == 1, "");
+	unit_test(a->next->next->val == 2, "");
+	stclear(&a);
 	return (OK);
 }
 
@@ -227,21 +193,18 @@ int	test_rrb(void *args)
 
 	catch_fd(1, 1);
 	rrb(&b);
-	b = stacknew();
+	stadd_back(&b, stnew(1));
 	rrb(&b);
-	stackadd_back(&b, lstadd_content(1));
-	rrb(&b);
-	stackadd_back(&b, lstadd_content(2));
-	stackadd_back(&b, lstadd_content(3));
+	stadd_back(&b, stnew(2));
+	stadd_back(&b, stnew(3));
 	rrb(&b);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "rrb\n") == 0, "");
 	free(ret);
-	unit_test(INT b->lst->content == 3, "");
-	unit_test(INT b->lst->next->content == 1, "");
-	unit_test(INT b->lst->next->next->content == 2, "");
-	unit_test(INT b->last->content == 2, "");
-	stackclear(&b);
+	unit_test(b->val == 3, "");
+	unit_test(b->next->val == 1, "");
+	unit_test(b->next->next->val == 2, "");
+	stclear(&b);
 	return (OK);
 }
 
@@ -255,50 +218,44 @@ int	test_rrr(void *args)
 	catch_fd(1, 1);
 	rrr(&a, &b);
 
-	a = stacknew();
-	b = stacknew();
+	stadd_back(&a, stnew(11));
 	rrr(&a, &b);
 
-	stackadd_back(&a, lstadd_content(11));
+	stadd_back(&b, stnew(21));
 	rrr(&a, &b);
 
-	stackadd_back(&b, lstadd_content(21));
+	stadd_back(&a, stnew(12));
 	rrr(&a, &b);
 
-	stackadd_back(&a, lstadd_content(12));
+	stclear(&a);
+
+	stadd_back(&b, stnew(22));
 	rrr(&a, &b);
 
-	stackclear(&a);
-	a = stacknew();
+	stclear(&b);
 
-	stackadd_back(&b, lstadd_content(22));
-	rrr(&a, &b);
-
-	stackclear(&b);
-	b = stacknew();
-
-	stackadd_back(&a, lstadd_content(11));
-	stackadd_back(&b, lstadd_content(21));
-	stackadd_back(&a, lstadd_content(12));
-	stackadd_back(&b, lstadd_content(22));
-	stackadd_back(&a, lstadd_content(13));
-	stackadd_back(&b, lstadd_content(23));
+	stadd_back(&a, stnew(11));
+	stadd_back(&b, stnew(21));
+	stadd_back(&a, stnew(12));
+	stadd_back(&b, stnew(22));
+	stadd_back(&a, stnew(13));
+	stadd_back(&b, stnew(23));
 	rrr(&a, &b);
 
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "rra\nrrb\nrrr\n") == 0, "");
 
-	unit_test(INT a->lst->content == 13, "");
-	unit_test(INT a->lst->next->content == 11, "");
-	unit_test(INT a->lst->next->next->content == 12, "");
+	unit_test(a->val == 13, "");
+	unit_test(a->next->val == 11, "");
+	unit_test(a->next->next->val == 12, "");
 
-	unit_test(INT b->lst->content == 23, "");
-	unit_test(INT b->lst->next->content == 21, "");
-	unit_test(INT b->lst->next->next->content == 22, "");
+	unit_test(b->val == 23, "");
+	unit_test(b->next->val == 21, "");
+	unit_test(b->next->next->val == 22, "");
 
 	free(ret);
-	stackclear(&a);
-	stackclear(&b);
+	stclear(&a);
+	stclear(&b);
 
 	return (OK);
 }
@@ -313,23 +270,20 @@ int	test_sa(void *args)
 
 	sa(&a);
 
-	a = stacknew();
+	stadd_back(&a, stnew(1));
 	sa(&a);
 
-	stackadd_back(&a, lstadd_content(1));
-	sa(&a);
-
-	stackadd_back(&a, lstadd_content(2));
-	stackadd_back(&a, lstadd_content(3));
+	stadd_back(&a, stnew(2));
+	stadd_back(&a, stnew(3));
 	sa(&a);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "sa\n") == 0, "");
 	free(ret);
-	unit_test(INT a->lst->content == 2, "");
-	unit_test(INT a->lst->next->content == 1, "");
-	unit_test(INT a->lst->next->next->content == 3, "");
+	unit_test(a->val == 2, "");
+	unit_test(a->next->val == 1, "");
+	unit_test(a->next->next->val == 3, "");
 
-	stackclear(&a);
+	stclear(&a);
 	return (OK);
 }
 
@@ -343,23 +297,22 @@ int	test_sb(void *args)
 
 	sb(&b);
 
-	b = stacknew();
 	sb(&b);
 
-	stackadd_back(&b, lstadd_content(1));
+	stadd_back(&b, stnew(1));
 	sb(&b);
 
-	stackadd_back(&b, lstadd_content(2));
-	stackadd_back(&b, lstadd_content(3));
+	stadd_back(&b, stnew(2));
+	stadd_back(&b, stnew(3));
 	sb(&b);
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "sb\n") == 0, "");
 	free(ret);
-	unit_test(INT b->lst->content == 2, "");
-	unit_test(INT b->lst->next->content == 1, "");
-	unit_test(INT b->lst->next->next->content == 3, "");
+	unit_test(b->val == 2, "");
+	unit_test(b->next->val == 1, "");
+	unit_test(b->next->next->val == 3, "");
 
-	stackclear(&b);
+	stclear(&b);
 	return (OK);
 }
 
@@ -373,50 +326,46 @@ int	test_ss(void *args)
 	catch_fd(1, 1);
 	ss(&a, &b);
 
-	a = stacknew();
-	b = stacknew();
 	ss(&a, &b);
 
-	stackadd_back(&a, lstadd_content(11));
+	stadd_back(&a, stnew(11));
 	ss(&a, &b);
 
-	stackadd_back(&b, lstadd_content(21));
+	stadd_back(&b, stnew(21));
 	ss(&a, &b);
 
-	stackadd_back(&a, lstadd_content(12));
+	stadd_back(&a, stnew(12));
 	ss(&a, &b);
 
-	stackclear(&a);
-	a = stacknew();
+	stclear(&a);
 
-	stackadd_back(&b, lstadd_content(22));
+	stadd_back(&b, stnew(22));
 	ss(&a, &b);
 
-	stackclear(&b);
-	b = stacknew();
+	stclear(&b);
 
-	stackadd_back(&a, lstadd_content(11));
-	stackadd_back(&a, lstadd_content(12));
-	stackadd_back(&a, lstadd_content(13));
-	stackadd_back(&b, lstadd_content(21));
-	stackadd_back(&b, lstadd_content(22));
-	stackadd_back(&b, lstadd_content(23));
+	stadd_back(&a, stnew(11));
+	stadd_back(&a, stnew(12));
+	stadd_back(&a, stnew(13));
+	stadd_back(&b, stnew(21));
+	stadd_back(&b, stnew(22));
+	stadd_back(&b, stnew(23));
 	ss(&a, &b);
 
 	ret = catch_fd(0, 1);
 	unit_test(strcmp(ret, "sa\nsb\nss\n") == 0, "");
 
-	unit_test(INT a->lst->content == 12, "");
-	unit_test(INT a->lst->next->content == 11, "");
-	unit_test(INT a->lst->next->next->content == 13, "");
+	unit_test(a->val == 12, "");
+	unit_test(a->next->val == 11, "");
+	unit_test(a->next->next->val == 13, "");
 
-	unit_test(INT b->lst->content == 22, "");
-	unit_test(INT b->lst->next->content == 21, "");
-	unit_test(INT b->lst->next->next->content == 23, "");
+	unit_test(b->val == 22, "");
+	unit_test(b->next->val == 21, "");
+	unit_test(b->next->next->val == 23, "");
 
 	free(ret);
-	stackclear(&a);
-	stackclear(&b);
+	stclear(&a);
+	stclear(&b);
 
 	return (OK);
 }

@@ -14,15 +14,18 @@
 
 /* define unit test functions HERE */
 /* push_swap */
-int	test_stacknew(void *);
-int	test_stackadd_back(void *);
-int	test_stackadd_front(void *);
-int	test_stackclear(void *);
-int	test_stack_rotate(void *);
-int	test_stack_rev_rotate(void *);
-int	test_stack_push(void *);
-int	test_stack_swap(void *);
-int	test_stack_issorted(void *);
+int	test_stnew(void *);
+int	test_stclear(void *);
+int	test_stadd_back(void *);
+int	test_stadd_front(void *);
+int	test_stpop_back(void *);
+int	test_stpop_front(void *);
+int	test_stswap(void *);
+int	test_strot(void *);
+int	test_strevrot(void *);
+int	test_stpush(void *);
+int	test_stissorted(void *);
+int	test_stfindi(void *);
 int	test_argparser(void *);
 int	test_push(void *);
 int	test_ra(void *);
@@ -37,16 +40,17 @@ int	test_ss(void *);
 
 static unit_t	tests[] = {
 	/* stack.c */
-	{ TEST_FCN(test_stacknew), NULL, NULL, RUN },
-	{ TEST_FCN(test_stackadd_back), NULL, NULL, RUN },
-	{ TEST_FCN(test_stackadd_front), NULL, NULL, RUN },
-	{ TEST_FCN(test_stackclear), NULL, NULL, RUN },
-	/* stack_operations.c */
-	{ TEST_FCN(test_stack_rotate), NULL, NULL, RUN },
-	{ TEST_FCN(test_stack_rev_rotate), NULL, NULL, RUN },
-	{ TEST_FCN(test_stack_push), NULL, NULL, RUN },
-	{ TEST_FCN(test_stack_swap), NULL, NULL, RUN },
-	{ TEST_FCN(test_stack_issorted), NULL, NULL, RUN },
+	{ TEST_FCN(test_stnew), NULL, NULL, RUN },
+	{ TEST_FCN(test_stclear), NULL, NULL, RUN },
+	{ TEST_FCN(test_stadd_back), NULL, NULL, RUN },
+	{ TEST_FCN(test_stadd_front), NULL, NULL, RUN },
+	{ TEST_FCN(test_stpop_back), NULL, NULL, RUN },
+	{ TEST_FCN(test_stpop_front), NULL, NULL, RUN },
+	{ TEST_FCN(test_stswap), NULL, NULL, RUN },
+	{ TEST_FCN(test_strot), NULL, NULL, RUN },
+	{ TEST_FCN(test_strevrot), NULL, NULL, RUN },
+	{ TEST_FCN(test_stpush), NULL, NULL, RUN },
+	{ TEST_FCN(test_stissorted), NULL, NULL, RUN },
 	/* argparser.c */
 	{ TEST_FCN(test_argparser), NULL, NULL, RUN },
 	/* push.c */

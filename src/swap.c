@@ -15,29 +15,28 @@
 
 void	sa(t_stack **a)
 {
-	if ((*a) && (*a)->lst && (*a)->size > 1)
+	if ((*a) && (*a)->next)
 	{
-		stack_swap(a);
+		stswap(a, &(*a)->next);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }
 
 void	sb(t_stack **b)
 {
-	if ((*b) && (*b)->lst && (*b)->size > 1)
+	if ((*b) && (*b)->next)
 	{
-		stack_swap(b);
+		stswap(b, &(*b)->next);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 }
 
 void	ss(t_stack **a, t_stack **b)
 {
-	if ((*a) && (*a)->lst && (*a)->size > 1
-		&& (*b) && (*b)->lst && (*b)->size > 1)
+	if ((*a) && (*a)->next && (*b) && (*b)->next)
 	{
-		stack_swap(a);
-		stack_swap(b);
+		stswap(a, &(*a)->next);
+		stswap(b, &(*b)->next);
 		ft_putendl_fd((char *)__func__, 1);
 	}
 	else

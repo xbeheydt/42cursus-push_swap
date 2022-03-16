@@ -36,33 +36,60 @@ static const char	*argv3[] = {
 	NULL
 };
 
-#define INT	*(int *)
+static const char	*argv4[] = {
+	"",
+	"12",
+	"-23",
+	"42",
+	"-23",
+	NULL
+};
+
+static const char	*argv5[] = {
+	"",
+	"12",
+	"43598435904353425234645734568768435968453",
+	"42",
+	"-23",
+	NULL
+};
+static const char	*argv6[] = {
+	"",
+	"12",
+	"2147483648",
+	"42",
+	"-23",
+	NULL
+};
 
 int	test_argparser(void *args)
 {
 	(void)args;
 
-	t_stack	*s;
+	t_stack	*s = NULL;
 
-	s = stacknew();
 	unit_test(argparser(&s, argv1) == 1, "");
-	unit_test(INT s->lst->content == 12, "");
-	unit_test(INT s->lst->next->content == 42, "");
-	unit_test(INT s->lst->next->next->content == -23, "");
-	unit_test(s->size == 3, "");
-	stackclear(&s);
+	unit_test(s->val == 12, "");
+	unit_test(s->next->val == 42, "");
+	unit_test(s->next->next->val == -23, "");
+	stclear(&s);
 
-	s = stacknew();
 	unit_test(argparser(&s, argv2) == 1, "");
-	unit_test(INT s->lst->content == 12, "");
-	unit_test(INT s->lst->next->content == 42, "");
-	unit_test(INT s->lst->next->next->content == -23, "");
-	unit_test(s->size == 3, "");
-	stackclear(&s);
+	unit_test(s->val == 12, "");
+	unit_test(s->next->val == 42, "");
+	unit_test(s->next->next->val == -23, "");
+	stclear(&s);
 
-	s = stacknew();
 	unit_test(argparser(&s, argv3) == 0, "");
-	stackclear(&s);
+	stclear(&s);
 
+	unit_test(argparser(&s, argv4) == 0, "");
+	stclear(&s);
+
+	unit_test(argparser(&s, argv5) == 0, "");
+	stclear(&s);
+
+	unit_test(argparser(&s, argv6) == 0, "");
+	stclear(&s);
 	return (OK);
 }

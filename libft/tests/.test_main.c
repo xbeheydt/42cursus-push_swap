@@ -15,6 +15,7 @@
 /* define unit test functions HERE */
 /* libft */
 int	test_ft_atoi(void *);
+int	test_ft_atol(void *);
 int	test_ft_bzero(void *);
 int	test_ft_calloc(void *);
 int	test_ft_isalnum(void *);
@@ -105,6 +106,7 @@ int	test_ft_printf_bonus_X(void *args);
 static unit_t	tests[] = {
 	/* libft */
 	{ TEST_FCN(test_ft_atoi), NULL, NULL, RUN },
+	{ TEST_FCN(test_ft_atol), NULL, NULL, RUN },
 	{ TEST_FCN(test_ft_bzero), NULL, NULL, RUN },
 	{ TEST_FCN(test_ft_calloc), NULL, NULL, RUN },
 	{ TEST_FCN(test_ft_isalnum), NULL, NULL, RUN },

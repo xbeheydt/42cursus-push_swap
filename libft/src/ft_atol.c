@@ -1,47 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xbeheydt <xbeheydt@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/29 15:06:01 by xbeheydt          #+#    #+#             */
-/*   Updated: 2021/11/17 08:57:31 by xbeheydt         ###   ########.fr       */
+/*   Created: 2021/11/04 18:02:37 by xbeheydt          #+#    #+#             */
+/*   Updated: 2021/11/05 07:00:40 by xbeheydt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
 #include <libft.h>
 
-void	ra(t_stack **a)
+long	ft_atol(const char *nptr)
 {
-	if ((*a) && (*a)->next)
-	{
-		strot(a);
-		ft_putendl_fd((char *)__func__, 1);
-	}
-}
+	long	ret;
+	int		sign;
 
-void	rb(t_stack **b)
-{
-	if ((*b) && (*b)->next)
+	ret = 0;
+	sign = 1;
+	while (ft_isspace(*nptr) && *nptr != '\0')
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
 	}
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	if ((*a) && (*a)->next && (*b) && (*b)->next)
-	{
-		strot(a);
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
-	}
-	else
-	{
-		ra(a);
-		rb(b);
-	}
+	while (ft_isdigit(*nptr) && *nptr)
+		ret = (ret * 10) + (*nptr++ - '0');
+	return (ret * sign);
 }

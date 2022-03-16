@@ -63,6 +63,7 @@ void	*ft_memset(void *b, int c, size_t len);
 
 /* type converters */
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 char	*ft_itoa(int n);
 
 /* print helpers */

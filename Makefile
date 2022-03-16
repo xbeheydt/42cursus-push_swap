@@ -31,7 +31,8 @@ SRCS			= src/argparser.c \
 				  src/rev_rotate.c \
 				  src/rotate.c \
 				  src/stack.c \
-				  src/stack_operations.c \
+				  src/stack2.c \
+				  src/stack3.c \
 				  src/swap.c
 SRCS_EXE		= ${SRCS} src/push_swap.c
 OBJS 			= $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS_EXE)))))
@@ -88,7 +89,7 @@ del-build:
 re: fclean all
 
 ARGS	?=
-tests:
+tests: $(NAME)
 	@$(MKDIR) ${EXE_DIR}
 	@$(CC) ${CFLAGS} ${IFLAGSTEST} -L${LIB_DIR} -o ${EXE_DIR}/tests ${SRCS} ${SRCS_TEST} -lft
 	@echo "push_swap test"

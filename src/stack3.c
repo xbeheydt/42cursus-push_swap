@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   stack3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xbeheydt <xbeheydt@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,37 +11,31 @@
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <libft.h>
 
-void	ra(t_stack **a)
+int	stissorted(t_stack *s, int way)
 {
-	if ((*a) && (*a)->next)
+	if (!s || !s->next)
+		return (-1);
+	while (s->next)
 	{
-		strot(a);
-		ft_putendl_fd((char *)__func__, 1);
+		if (!way && s->val > s->next->val)
+			return (0);
+		if (way && s->val < s->next->val)
+			return (0);
+		s = s->next;
 	}
+	return (1);
 }
 
-void	rb(t_stack **b)
+int	stfindi(t_stack *s, int i)
 {
-	if ((*b) && (*b)->next)
+	if (!s)
+		return (0);
+	while (s)
 	{
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
+		if (s->val == i)
+			return (1);
+		s = s->next;
 	}
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	if ((*a) && (*a)->next && (*b) && (*b)->next)
-	{
-		strot(a);
-		strot(b);
-		ft_putendl_fd((char *)__func__, 1);
-	}
-	else
-	{
-		ra(a);
-		rb(b);
-	}
+	return (0);
 }

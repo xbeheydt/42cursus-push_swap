@@ -9,7 +9,7 @@ project (
 	"42cursus-${NAME}"
 	VERSION 0.1.0
 )
-enable_testing()
+#enable_testing()
 
 add_subdirectory(tests)
 
@@ -80,6 +80,7 @@ set(
 	"${PROJECT_SOURCE_DIR}/src/ft_printf/parser.c"
 	"${PROJECT_SOURCE_DIR}/src/ft_printf/string.c"
 	"${PROJECT_SOURCE_DIR}/src/ft_printf/utils.c"
+	"${PROJECT_SOURCE_DIR}/src/ft_atol.c"
 )
 
 # Create static lib target
