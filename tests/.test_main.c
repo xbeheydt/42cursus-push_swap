@@ -24,6 +24,7 @@ int	test_stack_push(void *);
 int	test_stack_swap(void *);
 int	test_stack_issorted(void *);
 int	test_argparser(void *);
+int	test_push(void *);
 
 static unit_t	tests[] = {
 	/* stack.c */
@@ -39,6 +40,8 @@ static unit_t	tests[] = {
 	{ TEST_FCN(test_stack_issorted), NULL, NULL, RUN },
 	/* argparser.c */
 	{ TEST_FCN(test_argparser), NULL, NULL, RUN },
+	/* push.c */
+	{ TEST_FCN(test_push), NULL, NULL, RUN },
 	TEST_END
 };
 
