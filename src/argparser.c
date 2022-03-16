@@ -36,7 +36,8 @@ int	argparser(t_stack **s, const char *argv[])
 		if (ft_strlen(argv[i]) >= 12)
 			return (0);
 		content = ft_atol(argv[i]);
-		if (content < INT_MIN || content > INT_MAX || stfindi((*s), (int)content))
+		if (content < INT_MIN || content > INT_MAX
+			|| stfindi((*s), (int)content))
 			return (0);
 		stadd_back(s, stnew((int)content));
 		while (ft_isdigit(*argv[i]) || *argv[i] == MINUS || *argv[i] == PLUS)

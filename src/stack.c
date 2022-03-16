@@ -35,6 +35,7 @@ t_stack	*stnew(int val)
 void	stadd_back(t_stack **s, t_stack *n)
 {
 	t_stack	*cur;
+
 	if ((*s))
 	{
 		cur = (*s);
