@@ -68,13 +68,13 @@ int	test_argparser(void *args)
 
 	t_stack	*s = NULL;
 
-	unit_test(argparser(&s, argv1) == 1, "");
+	unit_test(argparser(&s, argv1) == 3, "");
 	unit_test(s->val == 12, "");
 	unit_test(s->next->val == 42, "");
 	unit_test(s->next->next->val == -23, "");
 	stclear(&s);
 
-	unit_test(argparser(&s, argv2) == 1, "");
+	unit_test(argparser(&s, argv2) == 3, "");
 	unit_test(s->val == 12, "");
 	unit_test(s->next->val == 42, "");
 	unit_test(s->next->next->val == -23, "");

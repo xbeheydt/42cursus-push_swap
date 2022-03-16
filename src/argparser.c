@@ -25,21 +25,22 @@
 int	argparser(t_stack **s, const char *argv[])
 {
 	int		i;
+	int		size;
 	long	content;
 
 	i = 1;
+	size = 0;
 	while (argv[i] != NULL)
 	{
 		if (!(ft_isdigit(*argv[i]) || ft_isspace(*argv[i])
 				|| *argv[i] == MINUS || *argv[i] == PLUS))
 			return (0);
-		if (ft_strlen(argv[i]) >= 12)
-			return (0);
 		content = ft_atol(argv[i]);
-		if (content < INT_MIN || content > INT_MAX
+		if (ft_strlen(argv[0]) >= 12 || content < INT_MIN || content > INT_MAX
 			|| stfindi((*s), (int)content))
 			return (0);
 		stadd_back(s, stnew((int)content));
+		++size;
 		while (ft_isdigit(*argv[i]) || *argv[i] == MINUS || *argv[i] == PLUS)
 			argv[i]++;
 		if (ft_isspace(*argv[i]))
@@ -47,5 +48,5 @@ int	argparser(t_stack **s, const char *argv[])
 		if (*argv[i] == '\0')
 			++i;
 	}
-	return (1);
+	return (size);
 }
